@@ -8,13 +8,14 @@ import { DEPOSIT_CONTRACT_ABI } from './DepositContract';
 import { environment } from '../../../environments/environment';
 import { BigNumber } from 'ethers/utils';
 
-const TESTNET_ID = 5;
-const TESTNET_URL = 'https://goerli.prylabs.net';
+export const TESTNET_ID = 5;
+export const TESTNET_URL = 'https://goerli.prylabs.net';
 export const DEPOSIT_AMOUNT = environment.depositAmount;
 
 export enum Web3Provider {
   PORTIS,
   METAMASK,
+  WALLETCONNECT,
 }
 
 export abstract class Web3Service {

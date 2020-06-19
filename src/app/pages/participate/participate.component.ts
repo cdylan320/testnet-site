@@ -18,6 +18,7 @@ import { ContractService } from '../../services/web3/contract.service';
 import { DEPOSIT_DATA_LENGTH } from './deposit-data-validator';
 import { DepositData, DecodeDepositDataService } from './decode-deposit-data.service';
 import { ValidatorActivationService, ValidatorStatusUpdate } from '../../services/eth2/validator-activation.service';
+import { WalletConnectService } from '../../services/web3/walletconnect.service';
 
 const DEPOSIT_DATA_STORAGE_KEY = 'deposit_data';
 
@@ -50,6 +51,7 @@ export class ParticipateComponent implements OnInit {
   constructor(
     private readonly portis: PortisService,
     private readonly metamask: MetamaskService,
+    private readonly walletConnect: WalletConnectService,
     private readonly snackbar: MatSnackBar,
     private readonly storage: LocalStorage,
     private readonly progress: ProgressService,
@@ -112,6 +114,11 @@ export class ParticipateComponent implements OnInit {
         await this.metamask.enable();
         break;
       case Web3Provider.PORTIS: this.web3 = this.portis; break;
+      case Web3Provider.WALLETCONNECT: {
+        this.web3 = this.walletConnect;
+        await this.walletConnect.enable();
+        break;
+      }
       default: throw new Error('Unknown provider: ' + provider);
     }
 

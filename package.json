@@ -33,6 +33,7 @@
     "@ngx-pwa/local-storage": "7.4.1",
     "@portis/web3": "2.0.0-beta.43",
     "@types/deep-equal": "1.0.1",
+    "@walletconnect/web3-provider": "^1.0.5",
     "core-js": "2.6.5",
     "deep-equal": "1.0.1",
     "ethers": "4.0.27",
@@ -43,6 +44,7 @@
     "node-sass": "4.11.0",
     "rxjs": "6.4.0",
     "tslib": "1.9.3",
+    "web3": "^1.2.9",
     "websocket": "1.0.28",
     "zone.js": "0.8.29"
   },
