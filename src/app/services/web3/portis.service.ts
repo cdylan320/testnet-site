@@ -12,7 +12,7 @@ const NETWORK = 'goerli';
 })
 export class PortisService extends Web3Service {
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    let provider: ethers.providers.AsyncSendable|undefined; 
+    let provider: ethers.providers.ExternalProvider | ethers.providers.JsonRpcFetchFunc; 
     try { 
       provider = isPlatformServer(platformId) ? undefined : new Portis(DAPP_ID, NETWORK).provider;
     } catch (e) {

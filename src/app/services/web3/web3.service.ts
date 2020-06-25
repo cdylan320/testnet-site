@@ -6,7 +6,7 @@ import { Buffer } from 'buffer';
 
 import { DEPOSIT_CONTRACT_ABI } from './DepositContract';
 import { environment } from '../../../environments/environment';
-import { BigNumber } from 'ethers/utils';
+import { BigNumber } from 'ethers';
 
 export const TESTNET_ID = 5;
 export const TESTNET_URL = 'https://goerli.prylabs.net';
@@ -21,7 +21,7 @@ export enum Web3Provider {
 export abstract class Web3Service {
   private signer: ethers.providers.JsonRpcSigner;
   constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(PLATFORM_ID) protected platformId: object,
     public readonly eth: ethers.providers.JsonRpcProvider,
   ) {
     // Do not use a real eth provider in server side rendering.
@@ -71,7 +71,7 @@ export abstract class Web3Service {
       return Promise.resolve('0');
     }
 
-    const bal = await this.eth.getBalance(address)
+    const bal = await this.eth.getBalance(address);
     return ethers.utils.formatEther(bal);
   }
 
@@ -86,10 +86,10 @@ export abstract class Web3Service {
       return Promise.resolve(0);
     }
 
-    const res: ethers.utils.Arrayish = await this.depositContract(address)
+    const res: ethers.utils.BytesLike = await this.depositContract(address)
       .functions
       .get_deposit_count();
-    return ethers.utils.bigNumberify(Buffer.from(ethers.utils.arrayify(res)).swap64()).toNumber();
+    return BigNumber.from(Buffer.from(ethers.utils.arrayify(res[0])).swap64()).toNumber();
   }
 
   /** Max value required to deposit */

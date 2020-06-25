@@ -107,6 +107,7 @@ export class ParticipateComponent implements OnInit {
   }
 
   async chooseWeb3Provider(provider: Web3Provider) {
+    console.log('provider: ', provider);
     switch (provider) {
       // Prompt user to change their network to goerli.
       case Web3Provider.METAMASK:
